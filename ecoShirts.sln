@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{55DAD50B-B6D5-4940-BD85-AD499A97CE37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{439A17E7-D591-4CAC-A557-AED3459AD51A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{64B39A82-9773-49CE-B9C8-883796C4AE81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Produto", "Produto", "{435931F1-7D46-4A97-B714-0A0BC52019FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{099E34CF-9489-4D51-85F9-D2F660CA7D99}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{439A17E7-D591-4CAC-A557-AED3459AD51A} = {55DAD50B-B6D5-4940-BD85-AD499A97CE37}
+		{64B39A82-9773-49CE-B9C8-883796C4AE81} = {439A17E7-D591-4CAC-A557-AED3459AD51A}
+		{435931F1-7D46-4A97-B714-0A0BC52019FC} = {439A17E7-D591-4CAC-A557-AED3459AD51A}
+		{099E34CF-9489-4D51-85F9-D2F660CA7D99} = {55DAD50B-B6D5-4940-BD85-AD499A97CE37}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9ADB74E-F8DD-4D1F-AA7A-35B3381549EE}
+	EndGlobalSection
+EndGlobal
