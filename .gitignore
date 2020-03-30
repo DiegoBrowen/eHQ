@@ -7,3 +7,5 @@
 /src/Identity/ecoShirts.Identity.Api/obj
 /src/Produto/eHQ.Produto.Api/bin/Debug/netcoreapp3.1
 /src/Produto/eHQ.Produto.Api/obj
+/eHQ.Estoque.Api/bin/Debug/netcoreapp3.1
+/eHQ.Estoque.Api/obj

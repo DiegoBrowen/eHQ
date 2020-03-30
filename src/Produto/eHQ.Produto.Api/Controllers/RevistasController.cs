@@ -1,92 +1,116 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using eHQ.Produto.Api.Data;
-using eHQ.Produto.Api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using eHQ.Produto.Api.Data;
+using eHQ.Produto.Api.Model;
 
 namespace eHQ.Produto.Api.Controllers
 {
-    public class RevistasController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RevistasController : ControllerBase
     {
-        private readonly ProdutoContext _produtoContext;
-        public RevistasController(ProdutoContext produtoContext)
+        private readonly ProdutoContext _context;
+
+        public RevistasController(ProdutoContext context)
         {
-            _produtoContext = produtoContext;
+            _context = context;
         }
 
-        /// <summary>
-        /// Retrieves a specific product by unique id
-        /// </summary>
-        /// <remarks>Awesomeness!</remarks>
-        /// <response code="200">Product created</response>
-        /// <response code="400">Product has missing/invalid values</response>
-        /// <response code="500">Oops! Can't create your product right now</response>
+        // GET: api/Revistas
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Revista>>> GetRevistas()
+        {
+            return await _context.Revistas.ToListAsync();
+        }
+
+        // GET: api/Revistas/5
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Revista), 200)]
-        [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
-        [ProducesResponseType(500)]
-        public async Task<ActionResult> Index(CancellationToken cancellationToken)
+        public async Task<ActionResult<Revista>> GetRevista(Guid id)
         {
-            var revistas = await _produtoContext.Revistas.ToListAsync(cancellationToken);
-            return Ok(revistas);
-        }
+            var revista = await _context.Revistas.FindAsync(id);
 
-        // GET: Revistas/Details/5
-        public async Task<ActionResult> Details(Guid id, CancellationToken cancellationToken)
-        {
-            var revista = await _produtoContext.Revistas.FindAsync(id, cancellationToken);
             if (revista == null)
+            {
                 return NotFound();
+            }
 
-            return Ok(revista);
+            return revista;
         }
 
-        // POST: Revistas/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Revista revista, CancellationToken cancellationToken)
+        // PUT: api/Revistas/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutRevista(Guid id, Revista revista)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            _produtoContext.Add(revista);
-            await _produtoContext.SaveChangesAsync(cancellationToken);
-
-            return NoContent();
-        }
-
-        // POST: Revistas/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Revista revista, CancellationToken cancellationToken)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            _produtoContext.Update(revista);
-            await _produtoContext.SaveChangesAsync(cancellationToken);
-
-            return NoContent();
-        }
-
-        // POST: Revistas/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken)
-        {
-            var revista = await _produtoContext.Revistas.FindAsync(id, cancellationToken);
-            if (revista == null)
+            if (id != revista.Id)
+            {
                 return BadRequest();
+            }
 
-            _produtoContext.Remove(revista);
-            await _produtoContext.SaveChangesAsync(cancellationToken);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            _context.Entry(revista).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RevistaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
+        }
+
+        // POST: api/Revistas
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Revista>> PostRevista(Revista revista)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            _context.Revistas.Add(revista);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRevista", new { id = revista.Id }, revista);
+        }
+
+        // DELETE: api/Revistas/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Revista>> DeleteRevista(Guid id)
+        {
+            var revista = await _context.Revistas.FindAsync(id);
+            if (revista == null)
+            {
+                return NotFound();
+            }
+
+            _context.Revistas.Remove(revista);
+            await _context.SaveChangesAsync();
+
+            return revista;
+        }
+
+        private bool RevistaExists(Guid id)
+        {
+            return _context.Revistas.Any(e => e.Id == id);
         }
     }
 }
