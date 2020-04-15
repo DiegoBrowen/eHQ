@@ -1,0 +1,6 @@
+D:\Projetos\ecoShirts\eHQ.EventBus\bin\Debug\netcoreapp3.1\eHQ.EventBus.deps.json
+D:\Projetos\ecoShirts\eHQ.EventBus\bin\Debug\netcoreapp3.1\eHQ.EventBus.dll
+D:\Projetos\ecoShirts\eHQ.EventBus\obj\Debug\netcoreapp3.1\eHQ.EventBus.AssemblyInfoInputs.cache
+D:\Projetos\ecoShirts\eHQ.EventBus\obj\Debug\netcoreapp3.1\eHQ.EventBus.AssemblyInfo.cs
+D:\Projetos\ecoShirts\eHQ.EventBus\obj\Debug\netcoreapp3.1\eHQ.EventBus.csprojAssemblyReference.cache
+D:\Projetos\ecoShirts\eHQ.EventBus\obj\Debug\netcoreapp3.1\eHQ.EventBus.csproj.CoreCompileInputs.cache
