@@ -13,12 +13,12 @@ namespace eHQ.EventBus
     public class MqConnection : IMqConnection
     {
         private readonly IConnectionFactory _connectionFactory;
-        private readonly ILogger<MqConnection> _logger;
+        private readonly ILogger<IMqConnection> _logger;
         IConnection _connection;
         bool _disposed;
         object sync_root = new object();
 
-        public MqConnection(IConnectionFactory connectionFactory, ILogger<MqConnection> logger)
+        public MqConnection(IConnectionFactory connectionFactory, ILogger<IMqConnection> logger)
         {
             _connectionFactory = connectionFactory;
             _logger = logger;

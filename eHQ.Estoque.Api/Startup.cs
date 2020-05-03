@@ -1,4 +1,8 @@
 using eHQ.Estoque.Api.Infra;
+using eHQ.Estoque.Api.IntegrationEvents.Events;
+using eHQ.Estoque.Api.IntegrationEvents.Handlers;
+using eHQ.EventBus.Extensions;
+using eHQ.EventBus.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +35,9 @@ namespace eHQ.Estoque.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+
+            services.AddEventBus(Configuration);
+            services.AddScoped<RevistaAdicionadaIntegrationEventHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +62,9 @@ namespace eHQ.Estoque.Api
             {
                 endpoints.MapControllers();
             });
+
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<RevistaAdicionadaIntegrationEvent, RevistaAdicionadaIntegrationEventHandler>();
         }
     }
 }

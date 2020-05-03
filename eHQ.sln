@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eHQ.Estoque.Api", "eHQ.Esto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{94576D40-8596-41A5-9C8F-2D09189FC56E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eHQ.EventBus", "eHQ.EventBus\eHQ.EventBus.csproj", "{3CF5EDF3-CDBA-41D2-AA69-0F343064421A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eHQ.EventBus", "eHQ.EventBus\eHQ.EventBus.csproj", "{3CF5EDF3-CDBA-41D2-AA69-0F343064421A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eHQ.IntegrationEventLog", "src\EventBus\eHQ.IntegrationEventLog\eHQ.IntegrationEventLog.csproj", "{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{3CF5EDF3-CDBA-41D2-AA69-0F343064421A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CF5EDF3-CDBA-41D2-AA69-0F343064421A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CF5EDF3-CDBA-41D2-AA69-0F343064421A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{D0D4178E-65F9-4CB8-8DDD-9A7A662EC1CE} = {94B6CD64-53DF-4DD0-807A-203A3D00C8C6}
 		{94576D40-8596-41A5-9C8F-2D09189FC56E} = {55DAD50B-B6D5-4940-BD85-AD499A97CE37}
 		{3CF5EDF3-CDBA-41D2-AA69-0F343064421A} = {94576D40-8596-41A5-9C8F-2D09189FC56E}
+		{8C1995F3-AD85-4E34-9CFD-3D3D90538FD3} = {94576D40-8596-41A5-9C8F-2D09189FC56E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9ADB74E-F8DD-4D1F-AA7A-35B3381549EE}

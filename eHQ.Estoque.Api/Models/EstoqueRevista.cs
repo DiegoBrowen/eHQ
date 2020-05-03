@@ -8,11 +8,17 @@ namespace eHQ.Estoque.Api.Models
 {
     public class EstoqueRevista
     {
-        [Required]
         public Guid Id { get; set; }
-        [Required(ErrorMessage = "A revista deve ser informada.")]
-        public Guid IdRevista { get; set; }
-        [Required(ErrorMessage = "A quantidade deve ser informada.")]
         public int Quantidade { get; set; }
+        public virtual Revista Revista { get; set; }
+        protected EstoqueRevista()
+        {
+        }
+
+        public EstoqueRevista(Revista revista)
+        {
+            Id = Guid.NewGuid();
+            Revista = revista;
+        }
     }
 }

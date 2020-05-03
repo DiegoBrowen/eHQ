@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eHQ.Estoque.Api.Infra;
 
-namespace eHQ.Estoque.Api.Migrations
+namespace eHQ.Estoque.Api.Infra.Migrations
 {
     [DbContext(typeof(EstoqueContext))]
-    [Migration("20200330003244_InitialCreate")]
+    [Migration("20200503224159_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,15 @@ namespace eHQ.Estoque.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ID_REVISTA")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("RevistaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ID_REVISTA");
+                    b.HasIndex("RevistaId");
 
                     b.ToTable("EstoqueRevistas");
                 });
@@ -43,18 +43,14 @@ namespace eHQ.Estoque.Api.Migrations
             modelBuilder.Entity("eHQ.Estoque.Api.Models.Revista", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Autor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -65,7 +61,16 @@ namespace eHQ.Estoque.Api.Migrations
                 {
                     b.HasOne("eHQ.Estoque.Api.Models.Revista", "Revista")
                         .WithMany()
-                        .HasForeignKey("ID_REVISTA");
+                        .HasForeignKey("RevistaId");
+                });
+
+            modelBuilder.Entity("eHQ.Estoque.Api.Models.Revista", b =>
+                {
+                    b.HasOne("eHQ.Estoque.Api.Models.EstoqueRevista", null)
+                        .WithOne()
+                        .HasForeignKey("eHQ.Estoque.Api.Models.Revista", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -16,12 +16,14 @@ namespace eHQ.Estoque.Api.Infra
         }
 
         public DbSet<EstoqueRevista> EstoqueRevistas { get; set; }
+        public DbSet<Revista> Revistas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new EstoqueRevistaMap());
+            modelBuilder.ApplyConfiguration(new RevistaMap());
         }
     }
 }

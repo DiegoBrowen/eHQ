@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eHQ.EventBus.Extensions;
 using eHQ.Produto.Api.Data;
+using eHQ.Produto.Api.IntegrationEvents.Interfaces;
+using eHQ.Produto.Api.IntegrationEvents.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +41,7 @@ namespace eHQ.Produto.Api
             });
 
             services.AddControllers();
+            services.AddEventBus<IProdutoIntegrationEventService, ProdutoIntegrationEventService>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

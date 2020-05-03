@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using eHQ.Produto.Api.Data;
 using eHQ.Produto.Api.Model;
+using eHQ.Produto.Api.IntegrationEvents.Interfaces;
+using eHQ.Produto.Api.IntegrationEvents.Events;
 
 namespace eHQ.Produto.Api.Controllers
 {
@@ -15,10 +17,11 @@ namespace eHQ.Produto.Api.Controllers
     public class RevistasController : ControllerBase
     {
         private readonly ProdutoContext _context;
-
-        public RevistasController(ProdutoContext context)
+        private readonly IProdutoIntegrationEventService _produtoIntegrationEventService;
+        public RevistasController(ProdutoContext context, IProdutoIntegrationEventService produtoIntegrationEventService)
         {
             _context = context;
+            _produtoIntegrationEventService = produtoIntegrationEventService;
         }
 
         // GET: api/Revistas
@@ -88,6 +91,9 @@ namespace eHQ.Produto.Api.Controllers
 
             _context.Revistas.Add(revista);
             await _context.SaveChangesAsync();
+
+            var produdoAdicoinadoIntegrationEvent = new RevistaAdicionadaIntegrationEvent(revista.Id, revista.Titulo, revista.Ano);
+            await _produtoIntegrationEventService.PublishEventAsync(produdoAdicoinadoIntegrationEvent);
 
             return CreatedAtAction("GetRevista", new { id = revista.Id }, revista);
         }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace eHQ.EventBus.Interfaces
 {
-    public interface IIntegrationEventHandler<TIntegrationEvent> where TIntegrationEvent : IntegrationEvent
+    public interface IIntegrationEventService
     {
-        Task Handle(TIntegrationEvent @event);
+        Task PublishEventAsync(IntegrationEvent integrationEvent);
     }
 }

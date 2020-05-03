@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 
 namespace eHQ.Estoque.Api.Infra.Map
 {
-    public class EstoqueRevistaMap : IEntityTypeConfiguration<EstoqueRevista>
+    public class RevistaMap : IEntityTypeConfiguration<Revista>
     {
-        public void Configure(EntityTypeBuilder<EstoqueRevista> builder)
+        public void Configure(EntityTypeBuilder<Revista> builder)
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Quantidade)
+            builder.Property(x => x.Titulo)
                    .IsRequired();
 
-            builder.HasOne<Revista>()
-                   .WithOne()
-                   .HasForeignKey<Revista>(x =>x.Id);
+            builder.Property(x => x.Ano)
+                   .IsRequired();
         }
     }
 }
