@@ -20,5 +20,9 @@ namespace eHQ.Produto.Api.Model
         public string Descricao { get; set; }
         [Required(ErrorMessage = "O desenhista deve ser informado.")]
         public string Desenhista { get; set; }
+        public Revista()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

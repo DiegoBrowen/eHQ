@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace eHQ.Produto.Api.Migrations
+namespace eHQ.Produto.Api.Infra.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateProduto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace eHQ.Produto.Api.Migrations
                     Autor = table.Column<string>(maxLength: 200, nullable: false),
                     Ano = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(maxLength: 200, nullable: false),
-                    Desenhista = table.Column<string>(nullable: true)
+                    Desenhista = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -16,10 +16,13 @@ namespace eHQ.Estoque.Api.Infra.Map
 
             builder.Property(x => x.Quantidade)
                    .IsRequired();
+            
+            builder.Property<Guid>("RevistaId")
+                   .IsRequired();
 
-            builder.HasOne<Revista>()
-                   .WithOne()
-                   .HasForeignKey<Revista>(x =>x.Id);
+            builder.HasOne(x => x.Revista)
+                   .WithMany()
+                   .HasForeignKey("RevistaId");
         }
     }
 }

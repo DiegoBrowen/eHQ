@@ -21,7 +21,7 @@ namespace eHQ.Produto.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration<Revista>( new RevistaMap());
+            modelBuilder.ApplyConfiguration( new RevistaMap());
         }
     }
 }

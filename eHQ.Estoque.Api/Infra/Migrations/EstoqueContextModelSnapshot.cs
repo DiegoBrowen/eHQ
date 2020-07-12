@@ -15,7 +15,7 @@ namespace eHQ.Estoque.Api.Infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -28,7 +28,7 @@ namespace eHQ.Estoque.Api.Infra.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("RevistaId")
+                    b.Property<Guid>("RevistaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -41,6 +41,7 @@ namespace eHQ.Estoque.Api.Infra.Migrations
             modelBuilder.Entity("eHQ.Estoque.Api.Models.Revista", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Ano")
@@ -59,14 +60,7 @@ namespace eHQ.Estoque.Api.Infra.Migrations
                 {
                     b.HasOne("eHQ.Estoque.Api.Models.Revista", "Revista")
                         .WithMany()
-                        .HasForeignKey("RevistaId");
-                });
-
-            modelBuilder.Entity("eHQ.Estoque.Api.Models.Revista", b =>
-                {
-                    b.HasOne("eHQ.Estoque.Api.Models.EstoqueRevista", null)
-                        .WithOne()
-                        .HasForeignKey("eHQ.Estoque.Api.Models.Revista", "Id")
+                        .HasForeignKey("RevistaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

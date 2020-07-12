@@ -11,40 +11,31 @@ namespace eHQ.EventBus.Extensions
 {
     public static class EventServiceConfigurationExtension
     {
-        public static void AddEventBus(this IServiceCollection services, IConfiguration configuration)
-        {
-            ConfigureEventBus(services, configuration);
-        }
-
-        public static void AddEventBus<TIntegrationEventServiceInterface, TIntegrationEventService>(this IServiceCollection services, IConfiguration configuration)
-            where TIntegrationEventServiceInterface : IIntegrationEventService
-            where TIntegrationEventService : TIntegrationEventServiceInterface
-        {
-            ConfigureEventBus(services, configuration);
-            AddIntegrationEventService<TIntegrationEventServiceInterface, TIntegrationEventService>(services, configuration);
-        }
-
-        private static void ConfigureEventBus(IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigureConnection(services, configuration);
             services.AddSingleton<IEventBusSubscriptionsManager, EventBusSubscriptionsManager>();
+            
             var queue = configuration["Queue"];
             services.AddSingleton<IEventBus, EventBus>(sp =>
             {
                 var connection = sp.GetRequiredService<IMqConnection>();
                 var logger = sp.GetRequiredService<ILogger<EventBus>>();
-                var eventBusSubcriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
-                var scope = services.BuildServiceProvider().CreateScope();
 
-                return new EventBus(connection, logger, eventBusSubcriptionsManager, scope, queue);
+                var eventBusSubcriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
+                var serviceProvider = services.BuildServiceProvider();
+
+                return new EventBus(connection, logger, eventBusSubcriptionsManager, serviceProvider, queue);
             });
+            return services;
         }
 
-        private static void AddIntegrationEventService<TIntegrationEventServiceInterface, TIntegrationEventService>(IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddIntegrationEventService<TIntegrationEventServiceInterface, TIntegrationEventService>(this IServiceCollection services)
             where TIntegrationEventServiceInterface : IIntegrationEventService
             where TIntegrationEventService : TIntegrationEventServiceInterface
         {
             services.AddTransient(typeof(TIntegrationEventServiceInterface), typeof(TIntegrationEventService));
+            return services;
         }
 
         private static void ConfigureConnection(IServiceCollection services, IConfiguration configuration)

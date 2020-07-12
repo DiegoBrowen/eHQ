@@ -20,14 +20,14 @@ namespace eHQ.EventBus
         private readonly IMqConnection _connection;
         private readonly ILogger<EventBus> _logger;
         private readonly IEventBusSubscriptionsManager _subsManager;
-        private readonly IServiceScope _serviceScope;
+        private readonly IServiceProvider _serviceProvider;
         private readonly string _queueName;
         private IModel _consumerChannel;
 
         public EventBus(IMqConnection connection,
                         ILogger<EventBus> logger,
                         IEventBusSubscriptionsManager subsManager,
-                        IServiceScope serviceScope,
+                        IServiceProvider serviceProvider,
                         string queueName)
         {
             _connection = connection;
@@ -35,7 +35,7 @@ namespace eHQ.EventBus
             _queueName = queueName;
             _consumerChannel = CreateConsumerChannel();
             _subsManager = subsManager;
-            _serviceScope = serviceScope;
+            _serviceProvider = serviceProvider;
         }
 
         public void Publish(IntegrationEvent @event)
@@ -181,12 +181,12 @@ namespace eHQ.EventBus
 
             if (_subsManager.HasSubscriptionsForEvent(eventName))
             {
-                using (_serviceScope)
+                using (_serviceProvider.CreateScope())
                 {
                     var subscriptions = _subsManager.GetHandlersForEvent(eventName);
                     foreach (var subscription in subscriptions)
                     {
-                        var handler = _serviceScope.ServiceProvider.GetRequiredService(subscription.HandlerType);
+                        var handler = _serviceProvider.GetRequiredService(subscription.HandlerType);
                         if (handler == null) 
                             continue;
 

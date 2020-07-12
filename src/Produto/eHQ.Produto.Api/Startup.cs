@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using eHQ.EventBus.Extensions;
+using eHQ.IntegrationEventLog;
+using eHQ.IntegrationEventLog.Extensions;
 using eHQ.Produto.Api.Data;
 using eHQ.Produto.Api.IntegrationEvents.Interfaces;
 using eHQ.Produto.Api.IntegrationEvents.Services;
@@ -31,9 +34,12 @@ namespace eHQ.Produto.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var assemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ProdutoContext>(options =>
-                options.UseSqlServer(connectionString));
+            {
+                options.UseSqlServer(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(assemblyName));
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -41,7 +47,10 @@ namespace eHQ.Produto.Api
             });
 
             services.AddControllers();
-            services.AddEventBus<IProdutoIntegrationEventService, ProdutoIntegrationEventService>(Configuration);
+            services.AddEventBus(Configuration)
+                    .AddIntegrationEventService<IProdutoIntegrationEventService, ProdutoIntegrationEventService>();
+
+            services.AddIntegrationEventLog(assemblyName, connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

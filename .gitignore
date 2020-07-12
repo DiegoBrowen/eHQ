@@ -9,3 +9,8 @@
 /src/Produto/eHQ.Produto.Api/obj
 /eHQ.Estoque.Api/bin/Debug/netcoreapp3.1
 /eHQ.Estoque.Api/obj
+/src/Estoque/eHQ.Estoque.Api/bin/Debug/netcoreapp3.1
+/src/Estoque/eHQ.Estoque.Api/obj
+/eHQ.Estoque.Api/bin/Debug/netcoreapp3.1
+/eHQ.Estoque.Api/obj
+/src/EventBus/eHQ.IntegrationEventLog

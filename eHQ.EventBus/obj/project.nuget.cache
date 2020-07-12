@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "yry6AzN/P9DZKGbV2u6FdGkRFk9JDzCcsarOqOHrxQ2IdM8kmtV9IPh4Xkx2MTEiSu3FUgIkrXMoESQeZw4Apw==",
+  "dgSpecHash": "ErI3cSS4GCyISWNwsUm4DTFsMFU23Xbc3cDhXddhGu491jdOsa4EpHh+358b99eTjzZ/ZAb9qhlSeGSrkNBBfw==",
   "success": true,
   "projectFilePath": "D:\\Projetos\\ecoShirts\\eHQ.EventBus\\eHQ.EventBus.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.3\\microsoft.extensions.configuration.abstractions.3.1.3.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.3\\microsoft.extensions.dependencyinjection.3.1.3.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.3\\microsoft.extensions.dependencyinjection.abstractions.3.1.3.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.3\\microsoft.extensions.logging.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\diego\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\diego\\.nuget\\packages\\rabbitmq.client\\5.1.2\\rabbitmq.client.5.1.2.nupkg.sha512"
   ],
